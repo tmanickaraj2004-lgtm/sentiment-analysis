@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Analyzer | College Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">🤖</span>
+                <div>
+                    <h1>AI Sentiment Analyzer</h1>
+                    <p class="subtitle">NLP & Rule-based intelligent sentiment classification with instant AI reasoning</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge badge-tech">Java 17 + Spring Boot 3</span>
+                <a href="/h2-console" target="_blank" class="badge badge-link" title="Open H2 Database Console">H2 Console ↗</a>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="main-grid">
+            <!-- Left Panel: Input & Analysis Result -->
+            <section class="card input-card">
+                <h2 class="card-title">
+                    <span class="icon">✍️</span> Enter Text or Review
+                </h2>
+                <p class="card-desc">Type or paste any product review, tweet, or comment to analyze its underlying emotional polarity.</p>
+
+                <!-- Quick Sample Buttons -->
+                <div class="samples-wrapper">
+                    <span class="samples-label">Quick test samples:</span>
+                    <div class="sample-chips">
+                        <button type="button" class="chip" onclick="setSample('The customer support was excellent and the product is amazing! I love it.')">
+                            ✨ Positive sample
+                        </button>
+                        <button type="button" class="chip" onclick="setSample('Terrible quality, broke after one day. Worst purchase ever and very disappointing.')">
+                            ⚠️ Negative sample
+                        </button>
+                        <button type="button" class="chip" onclick="setSample('The package arrived on Wednesday via standard postal delivery.')">
+                            ⚖️ Neutral sample
+                        </button>
+                        <button type="button" class="chip" onclick="setSample('The interface was not good and the service was not useful.')">
+                            🔄 Negation sample
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <textarea id="reviewText" placeholder="Type your text or review here... (e.g., 'The camera quality is great and battery life is wonderful!')" rows="5"></textarea>
+                    <div class="textarea-footer">
+                        <span id="charCount">0 characters</span>
+                        <button type="button" class="btn-secondary" onclick="clearInput()">Clear</button>
+                    </div>
+                </div>
+
+                <button id="analyzeBtn" class="btn-primary" onclick="analyzeSentiment()">
+                    <span id="btnText">Analyze Sentiment</span>
+                    <span id="btnSpinner" class="spinner hidden"></span>
+                </button>
+
+                <!-- Result Display Section -->
+                <div id="resultContainer" class="result-box hidden">
+                    <div class="result-header">
+                        <span class="result-tag">Analysis Result</span>
+                        <span id="resultSentiment" class="sentiment-badge">POSITIVE</span>
+                    </div>
+
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span>Confidence Score</span>
+                            <span id="confidenceValue" class="confidence-number">85.0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="confidenceBar" class="progress-bar-fill" style="width: 85%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="explanation-box">
+                        <div class="explanation-header">
+                            <span class="ai-sparkle">💡</span>
+                            <strong>AI Explanation & Reasoning:</strong>
+                        </div>
+                        <p id="explanationText" class="explanation-content"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: History Section -->
+            <section class="card history-card">
+                <div class="history-header">
+                    <div>
+                        <h2 class="card-title">
+                            <span class="icon">📜</span> Analysis History
+                        </h2>
+                        <p class="card-desc">All historical analyses saved in the H2 in-memory database.</p>
+                    </div>
+                    <button id="clearHistoryBtn" class="btn-danger" onclick="clearHistory()">
+                        🗑️ Clear History
+                    </button>
+                </div>
+
+                <div class="history-stats">
+                    <span>Total Analyses: <strong id="totalCount">0</strong></span>
+                    <button class="btn-refresh" onclick="loadHistory()" title="Refresh list">↻ Refresh</button>
+                </div>
+
+                <div id="historyList" class="history-list">
+                    <!-- History items will be injected by JavaScript -->
+                    <div class="empty-state">
+                        <p>No analyses performed yet. Enter a review above and click <strong>Analyze Sentiment</strong>!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p><strong>AI Sentiment Analyzer</strong> &bull; Developed with Spring Boot, Spring Data JPA, and H2 Database &bull; Clean Architecture for Presentation</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
